@@ -1,10 +1,14 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
 import styles from './auth.module.css';
 
 export default function AuthPage() {
+  return <Suspense fallback={<div style={{minHeight:'100vh'}} />}><AuthPageInner /></Suspense>;
+}
+
+function AuthPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { user, signIn, signUp } = useAuthStore();

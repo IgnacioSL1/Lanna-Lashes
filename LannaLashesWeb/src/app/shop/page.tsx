@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { getProducts, formatPrice, getProductBadge, ShopifyProduct } from '@/services/shopify';
@@ -22,6 +22,10 @@ const SORTS = [
 ];
 
 export default function ShopPage() {
+  return <Suspense fallback={<div style={{minHeight:'100vh'}} />}><ShopPageInner /></Suspense>;
+}
+
+function ShopPageInner() {
   const searchParams = useSearchParams();
   const { addItem } = useCartStore();
   const [products, setProducts]   = useState<ShopifyProduct[]>([]);
