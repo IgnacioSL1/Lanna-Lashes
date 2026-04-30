@@ -16,7 +16,7 @@ import { authenticate, AuthRequest } from '../middleware/auth';
 import { logger } from '../services/logger';
 
 export const mentorshipRouter = Router();
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-04-10' });
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2023-10-16' });
 
 // ── Plan definitions ──────────────────────────────────────────────────────────
 

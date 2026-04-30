@@ -8,7 +8,7 @@ import { prisma } from '../services/db';
 import { authenticate, AuthRequest } from '../middleware/auth';
 
 export const paymentsRouter = Router();
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2024-04-10' });
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, { apiVersion: '2023-10-16' });
 
 paymentsRouter.post('/create-intent', authenticate, async (req: AuthRequest, res: Response) => {
   const { courseId, amount, currency = 'usd' } = req.body;
@@ -41,7 +41,7 @@ paymentsRouter.post('/create-intent', authenticate, async (req: AuthRequest, res
   // Create ephemeral key for PaymentSheet
   const ephemeralKey = await stripe.ephemeralKeys.create(
     { customer: stripeCustomerId },
-    { apiVersion: '2024-04-10' }
+    { apiVersion: '2023-10-16' }
   );
 
   // Create PaymentIntent

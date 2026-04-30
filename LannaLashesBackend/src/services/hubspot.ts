@@ -3,6 +3,7 @@
  * Syncs users and events to HubSpot automatically
  */
 import { Client } from '@hubspot/api-client';
+import { FilterOperatorEnum } from '@hubspot/api-client/lib/codegen/crm/contacts/models/Filter';
 
 const client = new Client({ accessToken: process.env.HUBSPOT_ACCESS_TOKEN });
 
@@ -13,6 +14,7 @@ export const hubspot = {
   async createContact(user: { id: string; email: string; firstName: string; lastName: string }) {
     try {
       const contact = await client.crm.contacts.basicApi.create({
+        associations: [],
         properties: {
           email:      user.email,
           firstname:  user.firstName,
@@ -27,10 +29,10 @@ export const hubspot = {
       // Contact might already exist — try to find and return it
       if (err.code === 409) {
         const existing = await client.crm.contacts.searchApi.doSearch({
-          filterGroups: [{ filters: [{ propertyName: 'email', operator: 'EQ', value: user.email }] }],
+          filterGroups: [{ filters: [{ propertyName: 'email', operator: FilterOperatorEnum.Eq, value: user.email }] }],
           properties: ['email'],
           limit: 1,
-          after: 0,
+          after: '0',
           sorts: [],
         });
         return existing.results[0]?.id ?? null;
