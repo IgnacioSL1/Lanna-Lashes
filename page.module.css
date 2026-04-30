@@ -1,0 +1,607 @@
+.page { min-height: 100vh; }
+
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Hero ────────────────────────────────────────────────────────────────── */
+.hero {
+  background: var(--black);
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding: 80px 24px;
+}
+
+.heroContent {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.heroEyebrow {
+  font-family: var(--font-tight);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--mid);
+  margin-bottom: 16px;
+}
+
+.heroTitle {
+  font-family: var(--font-tight);
+  font-size: clamp(48px, 7vw, 90px);
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+  margin-bottom: 20px;
+}
+
+.heroSub {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+  margin-bottom: 36px;
+  font-weight: 300;
+}
+
+.heroCtas {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ctaPrimary {
+  font-family: var(--font-tight);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--white);
+  padding: 14px 28px;
+  border-radius: 2px;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+.ctaPrimary:hover { opacity: 0.85; }
+
+.ctaSecondary {
+  font-family: var(--font-tight);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.7);
+  padding: 14px 28px;
+  border: 0.5px solid rgba(255,255,255,0.25);
+  border-radius: 2px;
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s;
+}
+.ctaSecondary:hover { color: var(--white); border-color: rgba(255,255,255,0.5); }
+
+.heroDecor {
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.heroLL {
+  font-family: var(--font-tight);
+  font-size: clamp(200px, 25vw, 380px);
+  font-weight: 700;
+  color: rgba(255,255,255,0.03);
+  letter-spacing: -0.06em;
+  line-height: 1;
+  user-select: none;
+}
+
+/* ── Pillars ─────────────────────────────────────────────────────────────── */
+.pillars {
+  background: var(--white);
+  border-bottom: 0.5px solid var(--border);
+  padding: 60px 24px;
+}
+
+.pillars .container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.pillar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pillarIcon {
+  font-size: 24px;
+  color: var(--black);
+  line-height: 1;
+}
+
+.pillarTitle {
+  font-family: var(--font-tight);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--black);
+  letter-spacing: -0.02em;
+}
+
+.pillarDesc {
+  font-size: 14px;
+  color: var(--dark);
+  line-height: 1.7;
+  flex: 1;
+}
+
+.pillarLink {
+  font-family: var(--font-tight);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--black);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  border-bottom: 0.5px solid var(--black);
+  padding-bottom: 1px;
+  align-self: flex-start;
+  transition: opacity 0.15s;
+}
+.pillarLink:hover { opacity: 0.55; }
+
+/* ── Section ─────────────────────────────────────────────────────────────── */
+.section {
+  padding: 72px 24px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 36px;
+}
+
+.sectionLabel {
+  font-family: var(--font-tight);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--light);
+  margin-bottom: 6px;
+}
+
+.sectionTitle {
+  font-family: var(--font-tight);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--black);
+  letter-spacing: -0.02em;
+}
+
+.sectionLink {
+  font-family: var(--font-tight);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--light);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.15s;
+}
+.sectionLink:hover { color: var(--black); }
+
+/* ── Products grid ───────────────────────────────────────────────────────── */
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.productCard {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border-radius: 4px;
+  border: 0.5px solid var(--border);
+  overflow: hidden;
+  transition: transform 0.2s var(--ease-out), box-shadow 0.2s;
+}
+.productCard:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.07);
+}
+
+.productImage {
+  aspect-ratio: 1;
+  background: var(--off-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-bottom: 0.5px solid var(--border-lt);
+}
+
+.productLL {
+  font-family: var(--font-tight);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--mid);
+  letter-spacing: -0.05em;
+  opacity: 0.5;
+}
+
+.productBadge {
+  position: absolute;
+  top: 10px; left: 10px;
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-tight);
+  font-size: 9px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 2px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.productInfo { padding: 14px 16px 18px; }
+
+.productCategory {
+  font-family: var(--font-tight);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--light);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.productName {
+  font-family: var(--font-tight);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--black);
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+
+.productPriceRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.productOldPrice {
+  font-size: 12px;
+  color: var(--light);
+  text-decoration: line-through;
+}
+
+.productPrice {
+  font-family: var(--font-tight);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+/* ── Academy banner ──────────────────────────────────────────────────────── */
+.academyBanner {
+  background: var(--black);
+  padding: 80px 24px;
+}
+
+.academyBannerInner {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.academyBannerTitle {
+  font-family: var(--font-tight);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.academyBannerSub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.academyStats {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+.academyStat { display: flex; flex-direction: column; gap: 3px; }
+
+.academyStatNum {
+  font-family: var(--font-tight);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+
+.academyStatLabel {
+  font-size: 11px;
+  color: rgba(255,255,255,0.4);
+  font-weight: 400;
+}
+
+.academyBannerCta {
+  font-family: var(--font-tight);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: var(--white);
+  padding: 13px 24px;
+  border-radius: 2px;
+  text-decoration: none;
+  display: inline-block;
+  transition: opacity 0.15s;
+}
+.academyBannerCta:hover { opacity: 0.85; }
+
+.academyBannerCourses {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.courseCard {
+  display: flex;
+  background: rgba(255,255,255,0.06);
+  border: 0.5px solid rgba(255,255,255,0.08);
+  border-radius: 6px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.courseCard:hover { background: rgba(255,255,255,0.1); }
+
+.courseThumb {
+  width: 80px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.courseThumbLL {
+  font-family: var(--font-tight);
+  font-size: 22px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.07);
+  letter-spacing: -0.04em;
+}
+
+.courseLevelBadge {
+  position: absolute;
+  bottom: 6px; right: 6px;
+  font-family: var(--font-tight);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+}
+
+.courseCardBody {
+  padding: 12px 16px;
+  flex: 1;
+}
+
+.courseCategory {
+  font-family: var(--font-tight);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  display: block;
+  margin-bottom: 3px;
+}
+
+.courseCardTitle {
+  font-family: var(--font-tight);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: -0.01em;
+  margin-bottom: 8px;
+}
+
+.courseCardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.coursePrice {
+  font-family: var(--font-tight);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.courseMeta {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+}
+
+/* ── Community teaser ────────────────────────────────────────────────────── */
+.communityTeaser {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.communityDesc {
+  font-size: 15px;
+  color: var(--dark);
+  line-height: 1.7;
+  margin-top: 12px;
+}
+
+.communityPosts {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.communityPost {
+  display: flex;
+  gap: 12px;
+  background: var(--white);
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.postAvatar {
+  width: 36px; height: 36px;
+  border-radius: 18px;
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-tight);
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.postAuthor {
+  font-family: var(--font-tight);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--black);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.postText {
+  font-size: 13px;
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+/* ── Footer ──────────────────────────────────────────────────────────────── */
+.footer {
+  background: var(--black);
+  padding: 64px 24px 32px;
+  margin-top: 0;
+}
+
+.footerTop {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 48px;
+  border-bottom: 0.5px solid rgba(255,255,255,0.08);
+  margin-bottom: 32px;
+}
+
+.footerBrand { display: flex; flex-direction: column; gap: 16px; }
+
+.footerLogoMark {
+  width: 40px; height: 40px;
+  background: var(--white);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-tight);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--black);
+  letter-spacing: -0.05em;
+}
+
+.footerBrandText {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  line-height: 1.7;
+  max-width: 220px;
+}
+
+.footerCol { display: flex; flex-direction: column; gap: 10px; }
+
+.footerColTitle {
+  font-family: var(--font-tight);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 4px;
+}
+
+.footerLink {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.footerLink:hover { color: rgba(255,255,255,0.8); }
+
+.footerBottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footerCopy {
+  font-size: 12px;
+  color: rgba(255,255,255,0.2);
+}
+
+.footerLegal {
+  display: flex;
+  gap: 20px;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .productGrid      { grid-template-columns: repeat(2, 1fr); }
+  .academyBannerInner { grid-template-columns: 1fr; }
+  .academyBannerCourses { display: none; }
+  .footerTop        { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  .pillars .container { grid-template-columns: 1fr; gap: 32px; }
+  .communityTeaser  { grid-template-columns: 1fr; }
+  .section          { padding: 48px 24px; }
+  .heroTitle        { font-size: 42px; }
+  .footerTop        { grid-template-columns: 1fr; gap: 32px; }
+  .footerBottom     { flex-direction: column; gap: 12px; text-align: center; }
+  .sectionHeader    { flex-direction: column; align-items: flex-start; gap: 8px; }
+}

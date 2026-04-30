@@ -1,0 +1,203 @@
+.page {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+
+.avatar {
+  position: relative;
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: var(--dark);
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.initials {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-tight);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--white);
+  border-radius: 50%;
+  background: var(--dark);
+}
+
+.proBadge {
+  position: absolute;
+  bottom: -4px; right: -4px;
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-tight);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 2px 5px;
+  border-radius: 2px;
+  border: 2px solid var(--off-white);
+}
+
+.headerInfo { flex: 1; }
+
+.name {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 4px;
+}
+
+.email { font-size: 14px; color: var(--light); }
+
+.headerActions { display: flex; gap: 12px; align-items: center; }
+
+.signOutBtn {
+  padding: 10px 20px;
+  background: none;
+  border: 1.5px solid var(--border);
+  border-radius: 2px;
+  font-family: var(--font-tight);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.signOutBtn:hover { border-color: var(--black); }
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+
+.tab {
+  padding: 12px 24px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-family: var(--font-tight);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--light);
+  cursor: pointer;
+  margin-bottom: -1px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.tab:hover { color: var(--dark); }
+.tabActive { color: var(--black); border-bottom-color: var(--black); }
+
+/* Section */
+.section { min-height: 200px; }
+
+/* Course grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.cardSkel { height: 280px; border-radius: 4px; }
+
+.courseCard {
+  background: var(--white);
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+
+.courseThumb {
+  position: relative;
+  aspect-ratio: 16/9;
+  background: var(--surface);
+}
+
+.courseInfo {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.courseTitle {
+  font-family: var(--font-tight);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.progressBar {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--black);
+  border-radius: 2px;
+  transition: width 0.4s var(--ease-out);
+}
+
+.progressLabel { font-size: 12px; color: var(--light); }
+
+.resumeBtn {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 10px 16px;
+  background: var(--black);
+  color: var(--white);
+  text-decoration: none;
+  border-radius: 2px;
+  font-family: var(--font-tight);
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  transition: background 0.15s;
+}
+.resumeBtn:hover { background: var(--dark); }
+
+/* Empty state */
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 80px 0;
+  text-align: center;
+}
+.empty p { font-size: 15px; color: var(--light); }
+
+.emptyBtn {
+  padding: 14px 28px;
+  background: var(--black);
+  color: var(--white);
+  text-decoration: none;
+  border-radius: 2px;
+  font-family: var(--font-tight);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  transition: background 0.15s, transform 0.15s;
+}
+.emptyBtn:hover { background: var(--dark); transform: translateY(-1px); }

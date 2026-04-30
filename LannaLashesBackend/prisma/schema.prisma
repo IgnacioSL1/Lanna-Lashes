@@ -1,0 +1,290 @@
+// Lanna Lashes — PostgreSQL schema via Prisma
+// Run: npx prisma migrate dev
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ─── Users ────────────────────────────────────────────────────────────────────
+
+model User {
+  id               String       @id @default(cuid())
+  email            String       @unique
+  passwordHash     String
+  firstName        String
+  lastName         String
+  avatar           String?
+  isPro            Boolean      @default(false)
+  shopifyCustomerId String?     // Links to Shopify customer for order history
+  hubspotContactId  String?     // Links to HubSpot CRM contact
+  stripeCustomerId  String?     // Links to Stripe customer for billing
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+
+  enrollments          Enrollment[]
+  progress             LessonProgress[]
+  posts                Post[]
+  comments             Comment[]
+  postLikes            PostLike[]
+  commentLikes         CommentLike[]
+  notifications        Notification[]
+  mentorshipSubscription MentorshipSubscription?
+
+  @@index([email])
+}
+
+// ─── Courses ──────────────────────────────────────────────────────────────────
+
+model Course {
+  id                   String    @id @default(cuid())
+  title                String
+  slug                 String    @unique
+  description          String    @db.Text
+  shortDescription     String
+  thumbnail            String?
+  previewVideoUrl      String?
+  price                Int       // in cents
+  compareAtPrice       Int?
+  level                Level
+  category             String
+  totalLessons         Int       @default(0)
+  totalDurationMinutes Int       @default(0)
+  enrolledCount        Int       @default(0)
+  rating               Float     @default(0)
+  ratingCount          Int       @default(0)
+  published            Boolean   @default(false)
+  tags                 String[]
+  instructorName       String
+  instructorAvatar     String?
+  instructorBio        String    @db.Text
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  modules              Module[]
+  enrollments          Enrollment[]
+
+  @@index([slug])
+  @@index([published])
+}
+
+enum Level {
+  beginner
+  intermediate
+  advanced
+}
+
+model Module {
+  id        String   @id @default(cuid())
+  courseId  String
+  title     String
+  position  Int
+  createdAt DateTime @default(now())
+
+  course    Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lessons   Lesson[]
+
+  @@index([courseId])
+}
+
+model Lesson {
+  id              String   @id @default(cuid())
+  moduleId        String
+  title           String
+  position        Int
+  durationMinutes Int      @default(0)
+  videoUrl        String?  // Mux playback URL
+  muxAssetId      String?  // Mux asset ID for management
+  isPreview       Boolean  @default(false)
+  createdAt       DateTime @default(now())
+
+  module          Module   @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  progress        LessonProgress[]
+
+  @@index([moduleId])
+}
+
+model Enrollment {
+  id                    String    @id @default(cuid())
+  userId                String
+  courseId              String
+  stripePaymentIntentId String?
+  progressPercent       Int       @default(0)
+  enrolledAt            DateTime  @default(now())
+  completedAt           DateTime?
+  certificateUrl        String?
+  lastWatchedLessonId   String?
+
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course  Course @relation(fields: [courseId], references: [id])
+
+  @@unique([userId, courseId])
+  @@index([userId])
+}
+
+model LessonProgress {
+  id              String   @id @default(cuid())
+  userId          String
+  lessonId        String
+  progressSeconds Int      @default(0)
+  completedAt     DateTime?
+  updatedAt       DateTime @updatedAt
+
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson  Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+  @@index([userId])
+}
+
+// ─── Community ────────────────────────────────────────────────────────────────
+
+model Post {
+  id          String    @id @default(cuid())
+  authorId    String
+  content     String    @db.Text
+  images      String[]
+  tag         PostTag
+  likeCount   Int       @default(0)
+  commentCount Int      @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  author      User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  comments    Comment[]
+  likes       PostLike[]
+
+  @@index([authorId])
+  @@index([createdAt(sort: Desc)])
+  @@index([tag])
+}
+
+enum PostTag {
+  question
+  inspo
+  my_work
+  tip
+  general
+}
+
+model Comment {
+  id        String    @id @default(cuid())
+  postId    String
+  authorId  String
+  content   String    @db.Text
+  likeCount Int       @default(0)
+  createdAt DateTime  @default(now())
+
+  post      Post      @relation(fields: [postId], references: [id], onDelete: Cascade)
+  author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  likes     CommentLike[]
+
+  @@index([postId])
+}
+
+model PostLike {
+  userId    String
+  postId    String
+  createdAt DateTime @default(now())
+
+  user  User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  post  Post @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@id([userId, postId])
+}
+
+model CommentLike {
+  userId    String
+  commentId String
+  createdAt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  comment Comment @relation(fields: [commentId], references: [id], onDelete: Cascade)
+
+  @@id([userId, commentId])
+}
+
+// ─── Mentorship ───────────────────────────────────────────────────────────────
+
+enum MentorshipPlan {
+  monthly
+  biannual
+  annual
+}
+
+enum SubscriptionStatus {
+  active
+  past_due
+  canceled
+  trialing
+}
+
+model MentorshipSubscription {
+  id                   String             @id @default(cuid())
+  userId               String             @unique
+  plan                 MentorshipPlan
+  status               SubscriptionStatus @default(active)
+  stripeSubscriptionId String             @unique
+  stripeCustomerId     String
+  currentPeriodStart   DateTime
+  currentPeriodEnd     DateTime
+  cancelAtPeriodEnd    Boolean            @default(false)
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([status])
+}
+
+model MentorshipVideo {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  videoUrl    String   // Mux or direct URL
+  thumbnail   String?
+  duration    Int      @default(0) // minutes
+  published   Boolean  @default(false)
+  publishedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([published, publishedAt(sort: Desc)])
+}
+
+model MentorshipCall {
+  id           String    @id @default(cuid())
+  title        String
+  description  String?   @db.Text
+  scheduledAt  DateTime
+  meetUrl      String?   // Google Meet link (pre-call)
+  recordingUrl String?   // recording link (post-call)
+  duration     Int       @default(60) // minutes
+  isCompleted  Boolean   @default(false)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@index([scheduledAt])
+}
+
+// ─── Notifications ────────────────────────────────────────────────────────────
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  type      String   // 'comment', 'like', 'course_complete', 'new_course'
+  title     String
+  body      String
+  data      Json?
+  readAt    DateTime?
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, readAt])
+}

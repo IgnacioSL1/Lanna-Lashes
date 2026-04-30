@@ -1,0 +1,211 @@
+.page {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 32px 24px 80px;
+}
+
+.container { max-width: 680px; }
+
+.back {
+  background: none;
+  border: none;
+  font-family: var(--font-tight);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--light);
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 24px;
+  transition: color 0.15s;
+}
+.back:hover { color: var(--black); }
+
+/* Post */
+.post {
+  background: var(--white);
+  border-radius: 4px;
+  padding: 28px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.postSkel { height: 300px; border-radius: 4px; max-width: 680px; }
+
+.postHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--dark);
+  color: var(--white);
+  font-family: var(--font-tight);
+  font-size: 13px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.avatarImg { width: 100%; height: 100%; object-fit: cover; }
+
+.authorName {
+  font-family: var(--font-tight);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.postTime { font-size: 12px; color: var(--light); }
+
+.tagPill {
+  margin-left: auto;
+  background: var(--off-white);
+  font-family: var(--font-tight);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dark);
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.postContent {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--dark);
+  white-space: pre-wrap;
+}
+
+.postImage {
+  width: 100%;
+  border-radius: 4px;
+  object-fit: cover;
+  max-height: 480px;
+}
+
+.postActions {
+  display: flex;
+  gap: 20px;
+  padding-top: 4px;
+  border-top: 1px solid var(--border);
+}
+
+.action {
+  background: none;
+  border: none;
+  font-size: 14px;
+  color: var(--light);
+  cursor: pointer;
+  padding: 4px 0;
+  transition: color 0.15s;
+}
+.action:hover { color: var(--black); }
+.actionLiked { color: #e05c7a !important; }
+
+/* Comments */
+.comments {
+  background: var(--white);
+  border-radius: 4px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.commentsTitle {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.commentForm {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.commentInputWrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.commentInput {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: 3px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  resize: none;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.commentInput:focus { border-color: var(--black); }
+
+.commentBtn {
+  align-self: flex-end;
+  padding: 9px 20px;
+  background: var(--black);
+  color: var(--white);
+  border: none;
+  border-radius: 2px;
+  font-family: var(--font-tight);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.commentBtn:hover:not(:disabled) { background: var(--dark); }
+.commentBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.signInPrompt {
+  padding: 16px;
+  background: var(--surface);
+  border-radius: 3px;
+  text-align: center;
+}
+
+.signInLink {
+  font-family: var(--font-tight);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--black);
+}
+
+.noComments { font-size: 14px; color: var(--light); text-align: center; padding: 20px 0; }
+
+.commentList { display: flex; flex-direction: column; gap: 20px; }
+
+.comment {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.commentBody { flex: 1; }
+
+.commentMeta {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.commentAuthor {
+  font-family: var(--font-tight);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.commentTime { font-size: 12px; color: var(--light); }
+
+.commentContent { font-size: 14px; color: var(--dark); line-height: 1.6; }
