@@ -13,6 +13,8 @@ const LINKS = [
   { href: '/community',   label: 'Community' },
 ];
 
+const ANNOUNCEMENT = 'Free shipping on orders over $75 — Shop Now';
+
 export function Nav() {
   const pathname   = usePathname();
   const router     = useRouter();
@@ -21,14 +23,7 @@ export function Nav() {
   const [menuOpen,   setMenuOpen]   = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQ,    setSearchQ]    = useState('');
-  const [scrolled,   setScrolled]   = useState(false);
   const searchRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 8);
-    window.addEventListener('scroll', handler, { passive: true });
-    return () => window.removeEventListener('scroll', handler);
-  }, []);
 
   useEffect(() => { setMenuOpen(false); setSearchOpen(false); }, [pathname]);
 
@@ -46,27 +41,18 @@ export function Nav() {
 
   return (
     <>
-      <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
-        <div className={styles.inner}>
+      <nav className={styles.nav}>
 
-          {/* Logo */}
+        {/* Row 1 — Announcement bar */}
+        <div className={styles.announcement}>
+          {ANNOUNCEMENT}
+        </div>
+
+        {/* Row 2 — Logo + actions */}
+        <div className={styles.logoRow}>
           <Link href="/" className={styles.logo}>
-            <span className={styles.logoMark}>LL</span>
             <span className={styles.logoText}>LANNA LASHES</span>
           </Link>
-
-          {/* Desktop links */}
-          <div className={styles.links}>
-            {LINKS.map(l => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className={`${styles.link} ${pathname.startsWith(l.href) ? styles.linkActive : ''}`}
-              >
-                {l.label}
-              </Link>
-            ))}
-          </div>
 
           {/* Right actions */}
           <div className={styles.actions}>
@@ -105,6 +91,25 @@ export function Nav() {
           </div>
         </div>
 
+        {/* Row 3 — Nav links */}
+        <div className={styles.linksRow}>
+          <Link
+            href="/"
+            className={`${styles.homeLink} ${pathname === '/' ? styles.homeLinkActive : ''}`}
+          >
+            Home
+          </Link>
+          {LINKS.map(l => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className={`${styles.link} ${pathname.startsWith(l.href) ? styles.linkActive : ''}`}
+            >
+              {l.label}
+            </Link>
+          ))}
+        </div>
+
         {/* Search bar */}
         {searchOpen && (
           <form className={styles.searchBar} onSubmit={handleSearch}>
@@ -126,11 +131,20 @@ export function Nav() {
       {menuOpen && (
         <div className={styles.drawer}>
           <div className={styles.drawerInner}>
+            <Link
+              href="/"
+              className={`${styles.drawerLink} animate-fade-up delay-1`}
+              onClick={() => setMenuOpen(false)}
+            >
+              Home
+              <span className={styles.drawerArrow}>→</span>
+            </Link>
             {LINKS.map((l, i) => (
               <Link
                 key={l.href}
                 href={l.href}
-                className={`${styles.drawerLink} animate-fade-up delay-${i + 1}`}
+                className={`${styles.drawerLink} animate-fade-up delay-${i + 2}`}
+                onClick={() => setMenuOpen(false)}
               >
                 {l.label}
                 <span className={styles.drawerArrow}>→</span>
@@ -138,11 +152,11 @@ export function Nav() {
             ))}
             <div className={styles.drawerDivider} />
             {user ? (
-              <Link href="/profile" className={`${styles.drawerLink} animate-fade-up delay-4`}>
+              <Link href="/profile" className={`${styles.drawerLink} animate-fade-up delay-6`} onClick={() => setMenuOpen(false)}>
                 My Account
               </Link>
             ) : (
-              <Link href="/auth" className={`${styles.drawerLink} animate-fade-up delay-4`}>
+              <Link href="/auth" className={`${styles.drawerLink} animate-fade-up delay-6`} onClick={() => setMenuOpen(false)}>
                 Sign In / Register
               </Link>
             )}

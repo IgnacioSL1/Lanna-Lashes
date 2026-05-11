@@ -1,22 +1,27 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
 :root {
-  --black:      #000000;
-  --white:      #FFFFFF;
-  --dark:       #343433;
-  --mid:        #cbc8c1;
-  --light:      #b1afac;
-  --off-white:  #F5F4F2;
-  --surface:    #FAFAF9;
-  --border:     #E8E6E2;
-  --border-lt:  #F0EEE9;
+  --black:        #000000;
+  --white:        #ffffff;
+  --text:         #212326;
+  --warm-dark:    #1a1b18;
+  --placeholder:  #f3f3f3;
+  --off-white:    #f5f5f5;
+  --border:       #d2d5d9;
+  --light:        #b1afac;
+  --mid:          #cbc8c1;
 
-  --font-tight: 'Inter Tight', sans-serif;
-  --font-body:  'Inter', sans-serif;
+  /* legacy aliases kept for page.module.css / shop.module.css */
+  --dark:         #1a1b18;
+  --surface:      #f5f5f5;
+  --border-lt:    #e8e8e8;
 
-  --nav-h: 60px;
-  --sidebar-w: 240px;
-  --max-w: 1200px;
+  --font-body:    'Inter', sans-serif;
+  --font-tight:   'Inter', sans-serif;   /* no Inter Tight — use Inter everywhere */
+
+  --nav-h:        110px;   /* announcement 36px + logo 38px + links 36px */
+  --max-w:        1500px;
+  --pad-x:        50px;
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -26,9 +31,13 @@
 html { scroll-behavior: smooth; }
 
 body {
-  font-family: var(--font-body);
-  background: var(--off-white);
-  color: var(--black);
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  letter-spacing: 0.6px;
+  line-height: 1.8;
+  background: #ffffff;
+  color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -36,13 +45,65 @@ body {
 /* ── Scrollbar ──────────────────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--mid); border-radius: 2px; }
+::-webkit-scrollbar-thumb { background: var(--mid); border-radius: 0; }
 
 /* ── Typography ─────────────────────────────────────────────────────────────── */
-h1, h2, h3, h4, h5 { font-family: var(--font-tight); font-weight: 700; letter-spacing: -0.02em; }
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.51px;
+  line-height: 1.1;
+  color: var(--text);
+}
 
 /* ── Focus ───────────────────────────────────────────────────────────────────── */
-:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; border-radius: 2px; }
+:focus-visible { outline: 2px solid var(--black); outline-offset: 2px; border-radius: 0; }
+
+/* ── Buttons ─────────────────────────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 240px;
+  min-height: 50px;
+  padding: 0 32px;
+  background: var(--black);
+  color: var(--white);
+  border: 1px solid var(--black);
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.btn-primary:hover { background: var(--warm-dark); border-color: var(--warm-dark); }
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 240px;
+  min-height: 50px;
+  padding: 0 32px;
+  background: var(--white);
+  color: var(--warm-dark);
+  border: 1px solid var(--warm-dark);
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.btn-secondary:hover { background: var(--warm-dark); color: var(--white); }
 
 /* ── Animations ──────────────────────────────────────────────────────────────── */
 @keyframes fadeUp {
@@ -73,10 +134,10 @@ h1, h2, h3, h4, h5 { font-family: var(--font-tight); font-weight: 700; letter-sp
 
 /* ── Skeleton loader ────────────────────────────────────────────────────────── */
 .skeleton {
-  background: linear-gradient(90deg, var(--border) 25%, var(--border-lt) 50%, var(--border) 75%);
+  background: linear-gradient(90deg, var(--border) 25%, #e8e8e8 50%, var(--border) 75%);
   background-size: 400px 100%;
   animation: shimmer 1.4s ease infinite;
-  border-radius: 4px;
+  border-radius: 0;
 }
 
 /* ── Utility classes ─────────────────────────────────────────────────────────── */
@@ -87,8 +148,8 @@ h1, h2, h3, h4, h5 { font-family: var(--font-tight); font-weight: 700; letter-sp
 }
 
 .ll-mark {
-  font-family: var(--font-tight);
+  font-family: 'Inter', sans-serif;
   font-weight: 700;
-  letter-spacing: -0.04em;
-  color: var(--mid);
+  letter-spacing: 0.1em;
+  color: var(--text);
 }

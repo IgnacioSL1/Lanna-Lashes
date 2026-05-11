@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <CartProvider>
           <Nav />
-          <main style={{ paddingTop: 'var(--nav-h)', minHeight: '100vh' }}>
+          <main style={{ paddingTop: 'var(--nav-h)', minHeight: '100vh', background: '#ffffff' }}>
             {children}
           </main>
         </CartProvider>
