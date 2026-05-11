@@ -34,7 +34,9 @@ app.use(cors({
   origin: [
     'https://lannalashes.com',
     'https://www.lannalashes.com',
-    /^exp:\/\//,       // Expo Go
+    /^https:\/\/lanna-lashes.*\.vercel\.app$/,  // Vercel deployments
+    /^https:\/\/.*\.vercel\.app$/,              // any Vercel preview
+    /^exp:\/\//,                                // Expo Go
     /^http:\/\/localhost/,
   ],
   credentials: true,
